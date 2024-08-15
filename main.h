@@ -5,3 +5,5 @@
 void startExchange(User *usr, Currency &usrCurr);
 
 void exchg(std::string &choose, User *usr);
+
+void convert(User *usr);
