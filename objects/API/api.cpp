@@ -5,7 +5,7 @@
 const std::string API::getAPIkey()
 {
     std::string api_key;
-    std::ifstream file("api.key");
+    std::ifstream file("./objects/API/api.key");
 
     if (file.is_open())
     {
