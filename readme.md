@@ -1,1 +1,61 @@
-<p>Something like a small pet project to convert USD to other currencies, where I tried to properly organize the work of classes using knowledge of OOP (which I did badly, I think) Of the advantages - I got acquainted with the API connection in C++, a new library for json parsing, well, I played with OOP :) </p>
+# Конвертер валют
+
+Простое консольное приложение на C++ для конвертации валют, главным образом из USD в другие мировые валюты. Проект создан для практики объектно-ориентированного программирования (ООП), работы с API и JSON в C++.
+
+## Основные возможности
+
+- **Конвертация валют:** Перевод сумм из USD в любые другие поддерживаемые валюты по актуальному курсу.
+- **Интеграция с API:** Получение свежих курсов валют с помощью [openexchangerates.org](https://openexchangerates.org) через библиотеку `curl`.
+- **Работа с JSON:** Состояние кошелька пользователя и история операций хранятся в JSON-файле (используется `nlohmann/json`).
+- **ООП-дизайн:** Классы разделяют ответственность: `User` (Пользователь), `Currency` (Валюта), `API`, `Exchange` (Обмен).
+
+## Старт
+
+1. **Клонируйте репозиторий:**
+   ```bash
+   git clone https://github.com/rzmsq/currency-converter.git
+   cd currency-converter
+   ```
+
+2. **Установите зависимости:**
+   - Необходимы библиотеки: `curl`, `nlohmann/json`
+   - Установите их через пакетный менеджер или подключите вручную.
+
+3. **Получите API-ключ:**
+   - Зарегистрируйтесь на [openexchangerates.org](https://openexchangerates.org/signup/free) и получите бесплатный API-ключ.
+   - Поместите ваш ключ в файл `./objects/API/api.key` (одна строка — сам ключ).
+
+4. **Сборка:**
+   ```bash
+   g++ -std=c++17 main.cpp converter.cpp objects/API/api.cpp objects/user/user.cpp objects/currency/currency.cpp objects/exchange/exchange.cpp -lcurl -o currency-converter
+   ```
+
+5. **Запуск:**
+   ```bash
+   ./currency-converter
+   ```
+
+## Использование
+
+При запуске вы увидите меню:
+- **1:** Посмотреть баланс и валюты в кошельке.
+- **2:** Конвертировать валюту (по умолчанию из USD).
+- **3:** Выйти из приложения.
+
+Вся история изменений и баланс пользователя автоматически сохраняются в `data.json`.
+
+## Структура проекта
+
+- `main.cpp` — Точка входа, меню и обработка пользовательского ввода.
+- `converter.cpp` — Логика конвертации валют.
+- `objects/API/` — Класс для работы с API.
+- `objects/currency/` — Класс валюты и её свойства.
+- `objects/user/` — Класс пользователя, кошелёк, история операций.
+- `objects/exchange/` — Логика обмена валют.
+
+## Краткое описание основных классов
+
+- **API** — Получение курсов валют через HTTP-запросы.
+- **Currency** — Хранит информацию о валюте (имя, сумма, курс).
+- **User** — Кошелёк пользователя, добавление и конвертация валют.
+- **Exchange** — Логика обмена между валютами.
